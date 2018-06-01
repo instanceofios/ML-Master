@@ -16,6 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        var navigationController = UINavigationController()
+        
+        let returnValue = UserDefaults.standard.bool(forKey: "firstlogin")
+        var homeVC = UIViewController(nibName:nil, bundle: nil)
+        
+        if (returnValue) {
+            homeVC = MLHomeViewController(nibName:nil, bundle: nil)
+        } else {
+            homeVC = InfoPagesViewController(nibName:nil, bundle: nil)
+        }
+        
+        navigationController = UINavigationController(rootViewController: homeVC)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 
